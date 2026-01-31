@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import sys, os
+
+from issue_base.core import IssueManager
+from issue_base.args import Parser
+
+CURRENT_DIR = os.getcwd()
+
+IssueManager.set_base_dir(CURRENT_DIR)
+IssueManager.load_issues_from_dir()
+
+if __name__ == "__main__":
+    # Get rid of this fucking program name.
+    sys.argv.pop(0)
+    
+    if not sys.argv:
+        Parser.print_usage()
+
+    args = Parser.parse_args(sys.argv)
+
+    if args.n:
+        IssueManager.new_issue()
+
+    elif args.l:
+        IssueManager.list_issues()
+
+    elif args.id is not None:
+        IssueManager.list_issues_by_id(args.id)
+
+    elif args.u is not None:
+        IssueManager.list_issues_by_urge(args.u)
+
+    elif args.U is not None:
+        IssueManager.match_issues_by_urge(args.U)
+
+    elif args.c is not None:
+        IssueManager.close_issues(args.c)
+    
+    elif args.d is not None:
+        IssueManager.delete_issue_by_id(args.d)
+
+    elif args.D is not None:
+        IssueManager.delete_closed_issues()
