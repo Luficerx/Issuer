@@ -20,9 +20,8 @@ class Issue():
         self.closed = closed
 
     def display(self):
-        print(f"{self.name}")
+        print(f"{self.name} - '{self.date}'")
         print(f"    INFO: {self.info}")
-        print(f"    DATE {self.date}")
         if self.closed:
             print(f"    STATUS: CLOSED")
         else:
