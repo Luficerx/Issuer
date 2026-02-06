@@ -2,8 +2,19 @@ from datetime import datetime
 from typing import Any
 from pathlib import Path
 
+from sys import platform
 import argparse, os
 import json
+
+DATE_FORMATER = "%Y-%m-%d %H:%M:%S"
+ESC_CODES = True
+
+if platform == "win32":
+    os.system("")
+
+if os.name == "nt":
+    DATE_FORMATER = "%Y-%m-%d %H-%M-%S" 
+    
 
 class _StaticBase():
     def __init_subclass__(cls, **kwargs):
@@ -64,7 +75,7 @@ class IssueManager(_StaticBase):
             for i in range(levels):
                 print("\033[1A\033[K", end="")
 
-            date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            date = datetime.now().strftime(DATE_FORMATER)
             self.issues[date] = Issue(name, info, date, urge)
 
             print(f"** A new issue written to file '{date}.is' was created. **")
