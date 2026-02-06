@@ -32,7 +32,7 @@ class Issue():
         return f'"{self.name}" "{self.info}" "{self.date}" [{self.urge}] [{self.closed}]'
 
 class IssueManager(_StaticBase):
-    base_dir: str | None = None
+    base_dir: str = ""
     issues = {}
 
     def new_issue(self, **kwargs):
@@ -76,7 +76,7 @@ class IssueManager(_StaticBase):
         except KeyboardInterrupt as e:
             print("\nOperation cancelled.")
 
-    def list_issues(self) -> list[Issue]:
+    def list_issues(self):
         issues = list(self.issues.values())
         if issues:
             for issue in sorted(issues, key=lambda i: i.urge, reverse=True):
@@ -87,12 +87,12 @@ class IssueManager(_StaticBase):
     def set_base_dir(self, path: str):
         self.base_dir = path
 
-    def list_issues_by_urge(self, urge: int) -> list[Issue]:
+    def list_issues_by_urge(self, urge: int):
         for issue in self.issues.values():
             if issue.urge >= urge:
                 issue.display()
 
-    def match_issues_by_urge(self, urge: int) -> list[Issue]:
+    def match_issues_by_urge(self, urge: int):
         for issue in self.issues.values():
             if issue.urge == urge:
                 issue.display()
