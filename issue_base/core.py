@@ -7,7 +7,6 @@ import argparse, os
 import json
 
 DATE_FORMATER = "%Y-%m-%d %H:%M:%S"
-ESC_CODES = True
 
 if platform == "win32":
     os.system("")
